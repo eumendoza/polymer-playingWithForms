@@ -1,16 +1,82 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+<link rel="import" href="bower_components/iron-form/iron-form.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/gold-cc-input/gold-cc-input.html">
+<link rel="import" href="bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="bower_components/gold-cc-cvc-input/gold-cc-cvc-input.html">
+<link rel="import" href="bower_components/gold-cc-expiration-input/gold-cc-expiration-input.html">
 
 <dom-module is="checkout-form">
 
 	<template>
 		<style>
+			:host {
+			display: block;
+			}
+			.form-title {
+			margin-bottom: 20px;
+			}
+			.avatar {
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			overflow: hidden;
+			background: #3367d6;
+			margin-right: 20px;
+			}
+			.company {
+			color: #3367d6;
+			font-size: 20px;
+			font-weight: 200;
+			}
+			gold-cc-expiration-input {
+			  width: 50%;
+			  margin-right: 20px;
+			}
+			paper-button {
+			  background-color: #4285f4;
+			  color: #fff;
+			  margin-top: 50px;
+			  width: 100%;
+			}
 		</style>
+		<div class="horizontal layout center form-title">
+			<div class="avatar" item-icon></div>
+			<div class="flex company">ACME Goods Co.</div>
+		</div>
+		<form is="iron-form" id="form" method="post" action="/checkout">
+			<paper-input name="name" label="Name on card" required autocomplete="cc-name"></paper-input>
+			<gold-cc-input name="cc-number" required auto-validate card-type="{{typeOfCard}}"></gold-cc-input>
+			<div class="horizontal layout">
+				<gold-cc-expiration-input name="cc-expiration" required auto-validate label="Expiration"></gold-cc-expiration-input>
+				<gold-cc-cvc-input name="cc-cvc" required auto-validate card-type="[[typeOfCard]]"></gold-cc-cvc-input>
+			</div> 
+			<paper-button on-tap="_submit">Pay</paper-button>
+		</form>
 	</template>
 
 	<script>
 		Polymer({
-			is: 'checkout-form'
+			is: 'checkout-form',
+			listeners: {
+				'form.iron-form-submit': '_handleFormSubmit',
+				'form.iron-form-invalid': '_handleFormInvalid'
+			},
+			_submit: function(){
+				debugger;
+
+				this.$.form.submit();
+			},
+			_handleFormSubmit: function(){
+				console.log('Form submitted successfully!! Ouh Yeah!!')
+			},
+			_handleFormInvalid: function (event) {
+				debugger;
+		    	console.log(event.detail);
+		    },
 		});
 	</script>
 
