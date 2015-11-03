@@ -1,0 +1,13 @@
+{
+  "name": "polymer-playForm",
+  "description": "",
+  "homepage": "",
+  "keywords": [],
+  "author": "Eugenio Mendoza",
+  "private": true,
+  "dependencies": {
+    "iron-elements": "polymerElements/iron-elements#^1.0.3",
+    "paper-elements": "polymerElements/paper-elements#^1.0.4",
+    "gold-elements": "polymerelements/gold-elements#^1.0.1"
+  }
+}
