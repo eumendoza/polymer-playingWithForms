@@ -54,7 +54,7 @@
 				<gold-cc-expiration-input name="cc-expiration" required auto-validate label="Expiration"></gold-cc-expiration-input>
 				<gold-cc-cvc-input name="cc-cvc" required auto-validate card-type="[[typeOfCard]]"></gold-cc-cvc-input>
 			</div> 
-			<paper-button on-tap="_submit">Pay</paper-button>
+			<paper-button on-click="_submit">Pay</paper-button>
 		</form>
 	</template>
 
@@ -65,17 +65,16 @@
 				'form.iron-form-submit': '_handleFormSubmit',
 				'form.iron-form-invalid': '_handleFormInvalid'
 			},
-			_submit: function(){
-				debugger;
-
+			_submit: function() {
 				this.$.form.submit();
 			},
-			_handleFormSubmit: function(){
-				console.log('Form submitted successfully!! Ouh Yeah!!')
+			_handleFormSubmit: function(event) {
+				console.log('Form submitted bro');
+				console.log(JSON.stringify(event.detail));
+				console.log(this.$.form.serialize());
 			},
-			_handleFormInvalid: function (event) {
-				debugger;
-		    	console.log(event.detail);
+			_handleFormInvalid: function() {
+		    	console.log('Form is invalid bro');
 		    },
 		});
 	</script>
